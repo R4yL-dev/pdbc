@@ -1,2 +1,5 @@
 # Binary
 pdbc
+
+# Temporary files
+*.out
