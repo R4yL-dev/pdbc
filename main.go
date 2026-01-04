@@ -18,8 +18,6 @@ func main() {
 		os.Exit(1)
 	}
 
-	fmt.Println("Loading ...")
-
 	// Create channel for results and WaitGroup for synchronization
 	resultsChan := make(chan models.SearchResult, len(searchTerms))
 	var wg sync.WaitGroup
