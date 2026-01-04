@@ -24,10 +24,13 @@ Uninstall:
 make uninstall
 ```
 
-## Other commands
+## Clean
 
-- `make run` - Build and run the program
-- `make clean` - Remove binary and build artifacts
+Remove binary and build artifacts:
+
+```bash
+make clean
+```
 
 ## Usage
 

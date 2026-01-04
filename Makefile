@@ -3,15 +3,12 @@
 BINARY_NAME=pdbc
 INSTALL_PATH=/usr/local/bin
 
-.PHONY: all build run clean install
+.PHONY: all build clean install
 
 all: build
 
 build:
 	go build -o $(BINARY_NAME)
-
-run: build
-	./$(BINARY_NAME)
 
 clean:
 	rm -f $(BINARY_NAME)
