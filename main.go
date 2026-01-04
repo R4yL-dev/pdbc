@@ -10,14 +10,24 @@ import (
 	"sync"
 )
 
+const version = "1.0.0"
+
 func main() {
 	// Parse CLI arguments
-	searchTerms := os.Args[1:]
+	args := os.Args[1:]
 
-	if len(searchTerms) == 0 {
+	if len(args) == 0 {
 		printUsage()
 		os.Exit(1)
 	}
+
+	// Check for version flag
+	if args[0] == "--version" || args[0] == "-v" {
+		fmt.Printf("pdbc version %s\n", version)
+		os.Exit(0)
+	}
+
+	searchTerms := args
 
 	// Create spinner for loading indication
 	spin := spinner.New("Loading datas")
@@ -123,6 +133,9 @@ func fetchTiersForGames(games []models.Game) []models.GameResult {
 
 func printUsage() {
 	fmt.Println("Usage: pdbc <search_term> [search_term2] [search_term3] ...")
+	fmt.Println()
+	fmt.Println("Options:")
+	fmt.Println("  --version, -v  Show version")
 	fmt.Println()
 	fmt.Println("Examples:")
 	fmt.Println("  pdbc \"Anno\"")
