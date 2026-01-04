@@ -2,7 +2,77 @@
 
 CLI tool to search for games on Steam and display their ProtonDB compatibility tier.
 
-## Build
+## Installation
+
+### From GitHub Releases (Recommended)
+
+Download the latest release for your platform from the [releases page](https://github.com/R4yL-dev/pdbc/releases).
+
+#### Linux (amd64)
+
+```bash
+# Download the archive
+wget https://github.com/R4yL-dev/pdbc/releases/latest/download/pdbc_<version>_linux_x86_64.tar.gz
+
+# Extract
+tar xzf pdbc_<version>_linux_x86_64.tar.gz
+
+# Move to PATH
+sudo mv pdbc /usr/local/bin/
+
+# Verify installation
+pdbc --version
+```
+
+#### macOS (Apple Silicon)
+
+```bash
+# Download and extract
+curl -L https://github.com/R4yL-dev/pdbc/releases/latest/download/pdbc_<version>_darwin_arm64.tar.gz | tar xz
+
+# Move to PATH
+sudo mv pdbc /usr/local/bin/
+
+# Verify installation
+pdbc --version
+```
+
+#### macOS (Intel)
+
+```bash
+# Download and extract
+curl -L https://github.com/R4yL-dev/pdbc/releases/latest/download/pdbc_<version>_darwin_x86_64.tar.gz | tar xz
+
+# Move to PATH
+sudo mv pdbc /usr/local/bin/
+
+# Verify installation
+pdbc --version
+```
+
+#### Windows
+
+Download the appropriate `.zip` file from the [releases page](https://github.com/R4yL-dev/pdbc/releases), extract it, and add the directory to your PATH.
+
+#### Available Platforms
+
+- **Linux**: x86_64, i386, arm64, armv6 (Raspberry Pi 1/Zero), armv7 (Raspberry Pi 2/3)
+- **macOS**: x86_64 (Intel), arm64 (Apple Silicon M1/M2/M3)
+- **Windows**: x86_64, i386
+
+#### Verify Checksums
+
+```bash
+# Download checksums file
+wget https://github.com/R4yL-dev/pdbc/releases/latest/download/checksums.txt
+
+# Verify (Linux/macOS)
+sha256sum -c checksums.txt --ignore-missing
+```
+
+### From Source
+
+#### Build
 
 ```bash
 make
@@ -10,7 +80,7 @@ make
 
 This compiles the project and creates the `pdbc` binary.
 
-## Installation
+#### Install
 
 Install to `/usr/local/bin`:
 
@@ -24,7 +94,7 @@ Uninstall:
 make uninstall
 ```
 
-## Clean
+#### Clean
 
 Remove binary and build artifacts:
 

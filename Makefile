@@ -11,7 +11,7 @@ build:
 	go build -o $(BINARY_NAME)
 
 build-prod:
-	go build -ldflags="-s -w" -trimpath -o $(BINARY_NAME)
+	go build -ldflags="-s -w -X main.version=$(shell git describe --tags --always --dirty)" -trimpath -o $(BINARY_NAME)
 
 clean:
 	rm -f $(BINARY_NAME)

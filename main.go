@@ -10,7 +10,7 @@ import (
 	"sync"
 )
 
-const version = "1.0.0"
+var version = "dev"
 
 func main() {
 	// Parse CLI arguments

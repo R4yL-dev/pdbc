@@ -3,3 +3,7 @@ pdbc
 
 # Temporary files
 *.out
+
+# GoReleaser
+dist/
+.goreleaser.yaml.bak

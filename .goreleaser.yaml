@@ -1,0 +1,97 @@
+version: 2
+
+snapshot:
+  name_template: "{{ .Tag }}-next"
+
+builds:
+  - id: pdbc
+    binary: pdbc
+    main: .
+    goos:
+      - linux
+      - darwin
+      - windows
+    goarch:
+      - amd64
+      - 386
+      - arm
+      - arm64
+    goarm:
+      - "6"
+      - "7"
+    ignore:
+      - goos: darwin
+        goarch: 386
+      - goos: darwin
+        goarch: arm
+      - goos: windows
+        goarch: arm
+      - goos: windows
+        goarch: arm64
+    ldflags:
+      - -s -w
+      - -X main.version={{.Version}}
+    flags:
+      - -trimpath
+    env:
+      - CGO_ENABLED=0
+
+archives:
+  - id: pdbc-archives
+    format_overrides:
+      - goos: windows
+        format: zip
+    name_template: >-
+      {{ .ProjectName }}_
+      {{- .Version }}_
+      {{- .Os }}_
+      {{- if eq .Arch "amd64" }}x86_64
+      {{- else if eq .Arch "386" }}i386
+      {{- else }}{{ .Arch }}{{ end }}
+      {{- if .Arm }}v{{ .Arm }}{{ end }}
+    files:
+      - README*
+      - CHANGELOG*
+
+checksum:
+  name_template: 'checksums.txt'
+  algorithm: sha256
+
+release:
+  github:
+    owner: R4yL-dev
+    name: pdbc
+  draft: false
+  prerelease: auto
+  mode: append
+  name_template: "v{{.Version}}"
+  header: |
+    ## ProtonDB Checker v{{.Version}}
+
+    Téléchargez l'archive appropriée pour votre plateforme ci-dessous.
+  footer: |
+    **Vérifier les checksums :**
+    ```bash
+    sha256sum -c checksums.txt
+    ```
+
+    **Changelog complet** : https://github.com/R4yL-dev/pdbc/compare/{{.PreviousTag}}...{{.Tag}}
+
+changelog:
+  use: github
+  sort: asc
+  filters:
+    exclude:
+      - '^docs:'
+      - '^test:'
+      - '^chore:'
+      - 'typo'
+  groups:
+    - title: Features
+      regexp: '^.*?feat(\([[:word:]]+\))??!?:.+$'
+      order: 0
+    - title: Bug Fixes
+      regexp: '^.*?fix(\([[:word:]]+\))??!?:.+$'
+      order: 1
+    - title: Others
+      order: 999
