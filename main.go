@@ -6,6 +6,7 @@ import (
 	"pdbc/api"
 	"pdbc/display"
 	"pdbc/models"
+	"pdbc/spinner"
 	"sync"
 )
 
@@ -17,6 +18,10 @@ func main() {
 		printUsage()
 		os.Exit(1)
 	}
+
+	// Create spinner for loading indication
+	spin := spinner.New("Loading datas")
+	spin.Start()
 
 	// Create channel for results and WaitGroup for synchronization
 	resultsChan := make(chan models.SearchResult, len(searchTerms))
@@ -39,6 +44,9 @@ func main() {
 	for result := range resultsChan {
 		results = append(results, result)
 	}
+
+	// Stop spinner and clear the line
+	spin.Stop()
 
 	// Display results in original order
 	display.PrintAllResults(results, searchTerms)

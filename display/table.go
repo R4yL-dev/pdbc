@@ -183,8 +183,13 @@ func PrintAllResults(searchResults []models.SearchResult, searchTerms []string) 
 	for i, term := range searchTerms {
 		result, exists := resultMap[term]
 
+		// Add blank line before subsequent results (not before first one)
+		if i > 0 {
+			fmt.Println()
+		}
+
 		// Print header for this search term
-		fmt.Printf("\n=== Results for \"%s\" ===\n\n", term)
+		fmt.Printf("=== Results for \"%s\" ===\n\n", term)
 
 		if !exists {
 			fmt.Println("Error: Failed to retrieve results for this term")
@@ -203,10 +208,5 @@ func PrintAllResults(searchResults []models.SearchResult, searchTerms []string) 
 
 		// Print the table
 		PrintTable(result.Results)
-
-		// Add blank line between groups (except after last one)
-		if i < len(searchTerms)-1 {
-			fmt.Println()
-		}
 	}
 }
